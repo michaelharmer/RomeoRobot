@@ -75,11 +75,11 @@ void loop(void)
         switch(commands[i])
         {
           case 'f':
-             forward(120,120);
+             forward(130,130);
              delay(60);
             break;
           case 'b':
-            backward(120,120);
+            backward(130,130);
             delay(60);
             break;
           case 'l':
