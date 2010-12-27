@@ -9,7 +9,8 @@ int x=1;
 int y=0;
 
 int ledPin = 13;
-int key_s7 = 3;
+int play_button = 8;
+int record_button = 10;
 
 char commands[NUM_COMMANDS];
 int command_counter = 0;
@@ -52,7 +53,8 @@ digitalWrite(M2,LOW);
 void setup(void)
 {
 pinMode(ledPin, OUTPUT);
-  pinMode(key_s7, INPUT);  
+pinMode(play_button, INPUT);
+pinMode(record_button, INPUT);
 int i;
 for(i=4;i<=7;i++)
   pinMode(i, OUTPUT);
@@ -65,7 +67,13 @@ void loop(void)
   
   while(1)
   {
-    if (digitalRead(key_s7) == LOW)
+    if (digitalRead(record_button) == LOW)
+    {
+      record_mode = 1;
+      command_counter = 0;  
+    }
+    
+    if (digitalRead(play_button) == LOW)
     {
       if (record_mode)
         total_commands = command_counter;
@@ -99,7 +107,7 @@ void loop(void)
     
     if (record_mode && command_counter < NUM_COMMANDS)
     {
-    if (digitalRead(key_s7))
+    if (digitalRead(play_button))
       val=analogRead(x); //Read Analog input
     if(val>1000)
       commands[command_counter++] = 'f';
